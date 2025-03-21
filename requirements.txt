@@ -1,0 +1,7 @@
+sentence-transformers==3.4.1
+numpy
+faiss-cpu
+flask
+gunicorn
+beautifulsoup4
+scikit-learn
