@@ -15,7 +15,7 @@ def parse_markdown_files(folder_path, output_json, chunk_size=1200):
                 with open(file_path, 'r', encoding='utf-8') as f:
                     content = f.read()
 
-                # 分块处理（按段落或标题分割）
+                # split by paragraph
                 paragraphs = content.split('\n')
                 current_chunk = ""
                 for para in paragraphs:
