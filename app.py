@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from query import generate_answer_with_gpt, find_similar_documents, load_embeddings, load_faiss_index
 from sentence_transformers import SentenceTransformer
 
@@ -41,7 +41,7 @@ def query():
 
 @app.route("/")
 def home():
-    return "RAG chatbot API is running!"
+    return send_from_directory("templates", "index.html")
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5050)

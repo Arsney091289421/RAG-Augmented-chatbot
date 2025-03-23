@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG Chatbot</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; }
+        h1 { color: #333; }
+        .info-box { background-color: #e8f0fe; padding: 10px; margin-bottom: 20px; border-left: 4px solid #4285f4; color: #333; font-size: 14px; }
+        .input-section { margin-bottom: 20px; }
+        .answer-box, .sources-box { background-color: #fff; padding: 15px; margin-top: 20px; border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
+        .sources-box ul { padding-left: 20px; }
+        .sources-box li { margin-bottom: 10px; }
+        button { padding: 10px 20px; background-color: #4285f4; border: none; color: white; cursor: pointer; border-radius: 4px; }
+        button:hover { background-color: #357ae8; }
+    </style>
+</head>
+<body>
+    <h1>RAG Chatbot</h1>
+
+    <div class="info-box">
+        This chatbot answers questions <strong>ONLY</strong> based on retrieved documentation from:<br>
+        - <a href="https://scikit-learn.org/dev/versions.html" target="_blank">scikit-learn documentation</a><br>
+        - <a href="https://github.com/huggingface/transformers" target="_blank">Hugging Face Transformers</a><br>
+        Questions beyond this scope may not be answered.
+    </div>
+
+    <div class="input-section">
+        <input type="text" id="question" placeholder="Enter your question here..." style="width:70%; padding: 10px;">
+        <button onclick="askQuestion()">Ask</button>
+    </div>
+
+    <div class="answer-box" id="answerBox" style="display:none;">
+        <h3>Answer:</h3>
+        <p id="answer"></p>
+    </div>
+
+    <div class="sources-box" id="sourcesBox" style="display:none;">
+        <h3>Retrieved Sources:</h3>
+        <ul id="sourcesList"></ul>
+    </div>
+
+    <script>
+        function askQuestion() {
+            const question = document.getElementById("question").value;
+            if (!question) return;
+
+            fetch("/query", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ question })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("answerBox").style.display = "block";
+                document.getElementById("sourcesBox").style.display = "block";
+
+                document.getElementById("answer").innerText = data.answer;
+
+                const sourcesList = document.getElementById("sourcesList");
+                sourcesList.innerHTML = "";
+                data.sources.forEach(src => {
+                    const li = document.createElement("li");
+                    li.innerHTML = `<strong>Source:</strong> ${src.source} | <strong>Relevance Score:</strong> ${src.relevance_score.toFixed(4)}<br><em>${src.snippet}</em>`;
+                    sourcesList.appendChild(li);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
