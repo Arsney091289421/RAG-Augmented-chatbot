@@ -7,6 +7,24 @@ A lightweight RAG chatbot based on FAISS local retrieval and OpenAI Chat API. It
 
 ---
 
+### Demo Screenshots
+
+**Homepage**  
+![Homepage](docs/screenshot_homepage.png)
+
+**Example Q&A**  
+![Example Q&A](docs/screenshot_question_answer.png)
+
+---
+
+### Demo Video
+
+You can preview the demonstration video here:
+
+[![Watch the demo video](https://img.youtube.com/vi/TTDYCGNy000/0.jpg)](https://youtu.be/TTDYCGNy000)
+
+---
+
 ### Tech Stack
 - Python
 - FAISS
@@ -54,28 +72,6 @@ Visit [http://localhost:5050](http://localhost:5050) in your browser.
 docker build -t rag-chatbot .
 docker run -p 5050:5050 rag-chatbot
 ```
-
----
-
-### Demo Screenshots
-
-**Homepage**  
-![Homepage](docs/screenshot_homepage.png)
-
-**Example Q&A**  
-![Example Q&A](docs/screenshot_question_answer.png)
-
-**Terminal Logs**  
-![Terminal Logs](docs/screenshot_terminal.png)
-
----
-
-### Demo Video
-
-You can preview the demonstration video here:
-
-[![Watch the demo video](https://img.youtube.com/vi/TTDYCGNy000/0.jpg)](https://youtu.be/TTDYCGNy000)
-
 
 ---
 
