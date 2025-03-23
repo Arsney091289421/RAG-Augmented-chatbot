@@ -29,7 +29,7 @@ A lightweight RAG chatbot based on FAISS local retrieval and OpenAI Chat API. It
 ### Demo Deployment
 Deploy your own instance on Railway:
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template_url=https://github.com/Arsney091289421/RAG-Augmented-chatbot)
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?templateUrl=https://github.com/Arsney091289421/RAG-Augmented-chatbot)
 
 ---
 
