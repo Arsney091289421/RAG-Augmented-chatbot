@@ -57,5 +57,22 @@ docker run -p 5050:5050 rag-chatbot
 
 ---
 
+### Demo Screenshots
+
+**Homepage**  
+![Homepage](docs/screenshot_homepage.png)
+
+**Example Q&A**  
+![Example Q&A](docs/screenshot_question_answer.png)
+
+**Terminal Logs**  
+![Terminal Logs](docs/screenshot_terminal.png)
+
+---
+
+### Demo Video
+
+---
+
 ### Contact
 - GitHub: [https://github.com/Arsney091289421](https://github.com/Arsney091289421)
