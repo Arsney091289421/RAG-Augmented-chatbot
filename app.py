@@ -16,14 +16,28 @@ def query():
     data = request.json
     user_query = data.get("question", "")
 
-    # Find similar docs
-    results_sklearn = find_similar_documents(user_query, model, sklearn_index, sklearn_embeddings, sklearn_texts, top_k=3)
-    results_hf = find_similar_documents(user_query, model, hf_index, hf_embeddings, hf_texts, top_k=3)
+    # Find similar docs with source labels
+    results_sklearn = find_similar_documents(user_query, model, sklearn_index, sklearn_embeddings, sklearn_texts, source_label="sklearn", top_k=3)
+    results_hf = find_similar_documents(user_query, model, hf_index, hf_embeddings, hf_texts, source_label="transformers", top_k=3)
+
     combined_context = "\n\n".join([r[0] for r in results_sklearn + results_hf])
 
     # Generate GPT answer
     answer = generate_answer_with_gpt(user_query, combined_context)
-    return jsonify({"answer": answer})
+
+    # Return both answer and sources
+    sources = [
+    {
+        "snippet": r[0][:120].replace('\n', ' '),  # replace linebreaks
+        "source": r[2],                           # source code - sklearn / transformers)
+        "relevance_score": round(float(r[1]), 4)         # 4 decimal points and float - flask - jsonify() only support float
+    } 
+    for r in (results_sklearn + results_hf)
+]
+    return jsonify({
+        "answer": answer,
+        "sources": sources
+    })
 
 @app.route("/")
 def home():

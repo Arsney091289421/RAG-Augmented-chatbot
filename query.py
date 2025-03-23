@@ -22,21 +22,28 @@ def load_embeddings(embeddings_path, texts_path):
 def load_faiss_index(index_path):
     return faiss.read_index(index_path)
 
-def find_similar_documents(query, model, faiss_index, embeddings, texts, top_k=5):
+def find_similar_documents(query, model, faiss_index, embeddings, texts, source_label, top_k=5):
     query_embedding = model.encode([query])
     D, I = faiss_index.search(query_embedding, top_k)
-    results = [(texts[i], D[0][idx]) for idx, i in enumerate(I[0])]
+    results = [(texts[i], D[0][idx], source_label) for idx, i in enumerate(I[0])]
     return results
 
 def generate_answer_with_gpt(query, context):
-    prompt = f"You are a helpful assistant. Use the following context to answer the user's question.\n\nContext:\n{context}\n\nQuestion: {query}\n\nAnswer:"
+    system_prompt = (
+        "You are a helpful assistant. "
+        "Use ONLY the following provided context to answer the user's question. "
+        "If the answer is not found in the context, reply with: "
+        "'I don't know based on the provided documents.' "
+        "Do not make up information.\n\n"
+        f"Context:\n{context}"
+    )
     response = openai.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system", "content": "You are a helpful AI assistant."},
-            {"role": "user", "content": prompt}
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": query}
         ],
-        temperature=0.3
+        temperature=0.0  # # temperature=0.0 ensures deterministic, fact-based responses, minimizing hallucination
     )
     return response.choices[0].message.content.strip()
 
@@ -55,10 +62,17 @@ if __name__ == "__main__":
     user_query = input("Enter your question: ")
 
     # Search both indexes
-    results_sklearn = find_similar_documents(user_query, model, sklearn_index, sklearn_embeddings, sklearn_texts, top_k=3)
-    results_hf = find_similar_documents(user_query, model, hf_index, hf_embeddings, hf_texts, top_k=3)
+    results_sklearn = find_similar_documents(user_query, model, sklearn_index, sklearn_embeddings, sklearn_texts, source_label="sklearn", top_k=3)
+    results_hf = find_similar_documents(user_query, model, hf_index, hf_embeddings, hf_texts, source_label="transformers", top_k=3)
+
 
     combined_context = "\n\n".join([r[0] for r in results_sklearn + results_hf])
+
+    print("\nRetrieved sources:")
+    for idx, (text, score, source_label) in enumerate(results_sklearn + results_hf):
+        snippet_preview = text[:100].replace('\n', ' ')
+        print(f"[{idx+1}] (score={score:.4f}, source={source_label}): {snippet_preview}")
+
 
     answer = generate_answer_with_gpt(user_query, combined_context)
     print("\nAnswer:")
