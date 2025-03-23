@@ -72,7 +72,8 @@ docker run -p 5050:5050 rag-chatbot
 
 ### Demo Video
 
-You can preview the demonstration video here: [Watch on YouTube](https://youtu.be/TTDYCGNy000)
+[![Watch the demo video](https://img.youtube.com/vi/TTDYCGNy000/0.jpg)](https://youtu.be/TTDYCGNy000)
+
 
 ---
 
