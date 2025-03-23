@@ -1,0 +1,16 @@
+{
+    "build": {
+      "dockerfilePath": "Dockerfile"
+    },
+    "deploy": {
+      "startCommand": "python app.py",
+      "healthcheckPath": "/"
+    },
+    "env": {
+      "OPENAI_API_KEY": {
+        "required": true,
+        "description": "Your OpenAI API Key"
+      }
+    }
+  }
+  
