@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, send_from_directory
 from query import generate_answer_with_gpt, find_similar_documents, load_embeddings, load_faiss_index
 from sentence_transformers import SentenceTransformer
+import os
 
 app = Flask(__name__)
 
