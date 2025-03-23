@@ -31,7 +31,7 @@ You can preview the demonstration video here:
 - Sentence-Transformers
 - OpenAI Chat API
 - Flask
-- Railway / Docker deployment
+- Docker deployment
 
 ---
 
