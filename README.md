@@ -14,7 +14,6 @@ A lightweight RAG chatbot based on FAISS local retrieval and OpenAI Chat API. It
 ---
 
 ### Live Demo
-**[Click here to try the live demo on Hugging Face Spaces! 🚀](https://huggingface.co/spaces/Daniel192341/RAG-Augmented-chatbot-hfspace)**  
 
 [![Open in Spaces](https://img.shields.io/badge/🤗%20Open%20in%20Spaces-orange?logo=huggingface&logoColor=white)](https://huggingface.co/spaces/Daniel192341/RAG-Augmented-chatbot-hfspace)
 
