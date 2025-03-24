@@ -27,7 +27,7 @@ A lightweight RAG chatbot based on FAISS local retrieval and OpenAI Chat API. It
 
 You can preview the demonstration video here:
 
-[![Watch the demo video](https://img.youtube.com/vi/TTDYCGNy000/0.jpg)](https://youtu.be/TTDYCGNy000)
+[![Watch the demo video](https://img.youtube.com/vi/2uVrTe1jWlI/0.jpg)](https://youtu.be/2uVrTe1jWlI)
 
 ---
 
