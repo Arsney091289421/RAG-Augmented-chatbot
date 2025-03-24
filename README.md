@@ -23,7 +23,7 @@ A lightweight RAG chatbot based on FAISS local retrieval and OpenAI Chat API. It
 
 ---
 
-### Demo Video
+### Demo Video (using Docker Compose)
 
 You can preview the demonstration video here:
 
