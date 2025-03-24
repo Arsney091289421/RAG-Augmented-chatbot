@@ -17,7 +17,7 @@ A lightweight RAG chatbot based on FAISS local retrieval and OpenAI Chat API. It
 
 You can try the chatbot live on Hugging Face Spaces:
 
-[![Open in Spaces](https://raw.githubusercontent.com/huggingface/huggingface_hub/main/docs/source/_static/img/open-in-spaces-badge.svg)](https://huggingface.co/spaces/Daniel192341/RAG-Augmented-chatbot-hfspace)
+[![Open in Spaces](https://huggingface.co/datasets/huggingface/badges/raw/main/open-in-spaces-lg.svg)](https://huggingface.co/spaces/Daniel192341/RAG-Augmented-chatbot-hfspace)
 
 > This Hugging Face Space is a Gradio-based lightweight deployment for demo purposes.  
 > The complete frontend + Docker version is available in this main repository.
