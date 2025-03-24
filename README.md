@@ -50,22 +50,29 @@ You can preview the demonstration video here:
 
 ---
 
-### Local Setup
-#### 1. Clone the repository
+## Local Setup
+### 1. Clone the repository
 ```bash
 git clone https://github.com/Arsney091289421/RAG-Augmented-chatbot.git
 cd RAG-Augmented-chatbot
 ```
-#### 2. Install dependencies
+
+### 2. Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
-#### 3. Set environment variables
-Create a `.env` file in the project root with the following content:
+
+### 3. Set environment variables
+Copy the example file and create your own `.env`:
 ```bash
+cp .env.example .env
+```
+Then edit `.env` and add your OpenAI API Key:
+```
 OPENAI_API_KEY=your_openai_api_key_here
 ```
-#### 4. Run the app
+
+### 4. Run the app locally
 ```bash
 python app.py
 ```
@@ -73,13 +80,29 @@ Visit [http://localhost:5050](http://localhost:5050) in your browser.
 
 ---
 
-### Optional Docker Deployment
+## Docker Deployment (Option 1 — manual run)
 ```bash
 docker build -t rag-chatbot .
-docker run -p 5050:5050 rag-chatbot
+docker run -e PORT=5050 -p 5050:5050 --env-file .env rag-chatbot
 ```
+> You can change the external port if needed.  
+Example:
+```bash
+docker run -e PORT=5050 -p 8080:5050 --env-file .env rag-chatbot
+```
+Then open [http://localhost:8080](http://localhost:8080)
 
 ---
 
-### Contact
+## Docker Deployment (Option 2 — using Docker Compose)
+```bash
+docker-compose up --build
+```
+By default, it will run on [http://localhost:5050](http://localhost:5050).  
+Make sure to have your `.env` file ready in the project root.
+
+---
+
+## Contact
 - GitHub: [https://github.com/Arsney091289421](https://github.com/Arsney091289421)
+
