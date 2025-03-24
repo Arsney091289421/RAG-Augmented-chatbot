@@ -7,6 +7,12 @@ A lightweight RAG chatbot based on FAISS local retrieval and OpenAI Chat API. It
 
 ---
 
+### System Architecture
+
+![RAG Architecture](docs/architecture.drawio.png)
+
+---
+
 ### Demo Screenshots
 
 **Homepage**  
