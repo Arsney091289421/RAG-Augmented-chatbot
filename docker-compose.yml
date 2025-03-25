@@ -1,4 +1,3 @@
-version: '3.8'
 
 services:
   rag-chatbot:
@@ -10,4 +9,5 @@ services:
       - .env
     volumes:
       - ./embeddings:/app/embeddings
+      - ./config.json:/app/config.json  
     restart: unless-stopped

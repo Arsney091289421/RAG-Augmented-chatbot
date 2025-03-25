@@ -118,6 +118,36 @@ Make sure to have your `.env` file ready in the project root.
 
 ---
 
+## Configuration
+
+The chatbot’s behavior can be customized via the `config.json` file located in the project root.  
+No need to modify `query.py` directly — parameters are read automatically from `config.json`.
+
+### Adjustable parameters:
+| Parameter      | Description                                                 | Recommended value         |
+|----------------|-------------------------------------------------------------|---------------------------|
+| `model_name`   | The GPT model used for answering (e.g., `gpt-3.5-turbo`)     | `gpt-3.5-turbo` or `gpt-4`|
+| `temperature`  | Controls randomness of responses; lower = more deterministic | 0.0 – 0.4 (default: 0.3)  |
+| `top_k`        | Number of documents retrieved for context                   | 3 – 5 (default: 3)        |
+
+### Example `config.json`
+```json
+{
+  "model_name": "gpt-3.5-turbo",
+  "temperature": 0.3,
+  "top_k": 3
+}
+```
+
+**When running via Docker Compose, `config.json` is mounted into the container via volumes.**  
+If you change `config.json`, simply run:
+
+```bash
+docker-compose restart
+```
+
+This will apply new parameters without rebuilding the image.
+
 ## Contact
 - GitHub: [https://github.com/Arsney091289421](https://github.com/Arsney091289421)
 

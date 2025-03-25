@@ -10,6 +10,17 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false"
 # Load environment variables from .env file
 load_dotenv()
 
+# Load config.json
+with open(os.getenv("CONFIG_PATH", "config.json"), 'r') as f:
+    config = json.load(f)
+
+TEMPERATURE = config.get("temperature", 0.3)
+TOP_K = config.get("top_k", 3)
+MODEL_NAME = config.get("model_name", "gpt-3.5-turbo")
+
+#check config
+print(f"Using model: {MODEL_NAME}, temperature: {TEMPERATURE}, top_k: {TOP_K}")
+
 # Set OpenAI API key
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
@@ -38,12 +49,12 @@ def generate_answer_with_gpt(query, context):
         f"Context:\n{context}"
     )
     response = openai.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model=MODEL_NAME,
         messages=[
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": query}
         ],
-        temperature=0.0  # # temperature=0.0 ensures deterministic, fact-based responses, minimizing hallucination
+        temperature=TEMPERATURE  # # temperature ensures deterministic, fact-based responses, minimizing hallucination
     )
     return response.choices[0].message.content.strip()
 
@@ -62,8 +73,8 @@ if __name__ == "__main__":
     user_query = input("Enter your question: ")
 
     # Search both indexes
-    results_sklearn = find_similar_documents(user_query, model, sklearn_index, sklearn_embeddings, sklearn_texts, source_label="sklearn", top_k=3)
-    results_hf = find_similar_documents(user_query, model, hf_index, hf_embeddings, hf_texts, source_label="transformers", top_k=3)
+    results_sklearn = find_similar_documents(user_query, model, sklearn_index, sklearn_embeddings, sklearn_texts, source_label="sklearn", top_k=TOP_K)
+    results_hf = find_similar_documents(user_query, model, hf_index, hf_embeddings, hf_texts, source_label="transformers", top_k=TOP_K)
 
 
     combined_context = "\n\n".join([r[0] for r in results_sklearn + results_hf])
