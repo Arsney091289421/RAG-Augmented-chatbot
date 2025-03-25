@@ -122,7 +122,7 @@ Make sure to have your `.env` file ready in the project root.
 After the initial build, you don't need to rebuild every time.
 You can simply start the container in detached mode by running:
 ```bash
-docker-compose up -d
+docker-compose up
 ```
 This will use the existing build and run in the background.
 
