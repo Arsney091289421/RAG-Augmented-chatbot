@@ -42,7 +42,7 @@ You can also check out the Hugging Face Space source code here:
 
 You can preview the demonstration video here:
 
-[![Watch the demo video](https://img.youtube.com/vi/2uVrTe1jWlI/0.jpg)](https://youtu.be/2uVrTe1jWlI)
+[![Watch the demo video](https://img.youtube.com/vi/CqDA03Q3pow/0.jpg)](https://youtu.be/CqDA03Q3pow)
 
 ---
 
