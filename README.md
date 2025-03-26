@@ -23,7 +23,7 @@ You can try the chatbot live on Hugging Face Spaces:
 > This Hugging Face Space is a Gradio-based lightweight deployment for demo purposes.  
 > The complete frontend + Docker version is available in this main repository.
 
-You can also check out the Hugging Face Space source code here:  
+But you can still check out the Hugging Face Space source code and deploy your own version here:
 [Hugging Face Space GitHub Repository](https://github.com/Arsney091289421/RAG-Augmented-chatbot-hfspace)
 
 ---
