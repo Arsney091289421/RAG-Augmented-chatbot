@@ -13,7 +13,7 @@ A lightweight RAG chatbot based on FAISS local retrieval and OpenAI Chat API. It
 
 ---
 
-### Live Demo (currently disabled due to OpenAI API misuse )
+### Live Demo (Demo temporarily disabled due to unexpected OpenAI API quota overages caused by platform enforcement delays. Local deployment instructions and demo video are provided below. )
 
 You can try the chatbot live on Hugging Face Spaces:
 
