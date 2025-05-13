@@ -25,6 +25,17 @@ You can also check out the Hugging Face Space source code and deploy your own ve
 
 The complete frontend + Docker version is available in this main repository.
 
+###  Rate Limiting 
+
+This demo includes a built-in rate limiting mechanism to prevent abuse and protect OpenAI API usage:
+
+- **Per session:** max **10** requests per day  
+- **Global total:** max **100** requests per day across all users
+
+All limits reset **automatically every 24 hours**, and are stored using **Redis Cloud** with key expiry (`EXPIRE`) to ensure cleanup.
+
+**Session-level tracking** is implemented via Gradio’s `State` component, allowing browser-based user isolation.
+
 ---
 
 ### Demo Screenshots
