@@ -19,7 +19,7 @@ A lightweight RAG chatbot based on FAISS local retrieval and OpenAI Chat API. It
 
 _(This demo is available on Hugging Face Spaces. Limited usage: 10 requests per session / 100 total per day.)_
 
-But you can also check out the Hugging Face Space source code and deploy your own version here:
+You can also check out the Hugging Face Space source code and deploy your own version here:
 
 [Hugging Face Space GitHub Repository](https://github.com/Arsney091289421/RAG-Augmented-chatbot-hfspace)
 
