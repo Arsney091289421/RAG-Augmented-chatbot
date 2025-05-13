@@ -13,11 +13,13 @@ A lightweight RAG chatbot based on FAISS local retrieval and OpenAI Chat API. It
 
 ---
 
-### Live Demo (Temporarily disabled)
+## Live Demo
 
-_(Demo temporarily disabled due to unexpected OpenAI API quota overages caused by delayed enforcement on their platform. For a fully reproducible experience, please refer to the demo video and local deployment instructions below.)_
+[![Live Demo](https://img.shields.io/badge/%F0%9F%9A%80%20Live%20Demo-blue?logo=gradio)](https://huggingface.co/spaces/Daniel192341/RAG-Augmented-chatbot-hfspace)
 
-But you can still check out the Hugging Face Space source code and deploy your own version here:
+_(This demo is available on Hugging Face Spaces. Limited usage: 10 requests per session / 100 total per day.)_
+
+But you can also check out the Hugging Face Space source code and deploy your own version here:
 
 [Hugging Face Space GitHub Repository](https://github.com/Arsney091289421/RAG-Augmented-chatbot-hfspace)
 
