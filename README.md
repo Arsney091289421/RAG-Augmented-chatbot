@@ -27,12 +27,14 @@ The complete frontend + Docker version is available in this main repository.
 
 ###  Rate Limiting 
 
-This demo includes a built-in rate limiting mechanism to prevent abuse and protect OpenAI API usage:
+This demo implements built-in rate limiting using:
 
-- **Per session:** max **10** requests per day  
-- **Global total:** max **100** requests per day across all users
+- **Per session**: Max 10 requests/day  
+- **Global limit**: Max 100 requests/day (across all sessions)  
+- **Auto-reset**: Limits reset daily via Redis key expiry (`EXPIRE`)  
+- **Tracking**: Sessions tracked in Gradio with `gr.State`, Redis stores counters
 
-All limits reset **automatically every 24 hours**, and are stored using **Redis Cloud** with key expiry (`EXPIRE`) to ensure cleanup.
+This helps prevent abuse and demonstrates protection of external API keys using **Redis Cloud**.
 
 **Session-level tracking** is implemented via Gradio’s `State` component, allowing browser-based user isolation.
 
