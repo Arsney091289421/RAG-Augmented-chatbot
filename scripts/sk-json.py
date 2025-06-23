@@ -41,7 +41,7 @@ def parse_html_files(folder_path, output_json, chunk_size=1200):
 
 
 if __name__ == "__main__":
-    html_folder = "/Users/daniel/Documents/AIDI/projects/RAG/scikit-learn-docs"  # 你的 HTML 文件目录
+    html_folder = "/Users/daniel/Documents/AIDI/projects/RAG/scikit-learn-docs"  
     output_file = "/Users/daniel/Documents/AIDI/projects/RAG/sklearn_html_clean_chunks.json"
 
     parse_html_files(html_folder, output_file)
