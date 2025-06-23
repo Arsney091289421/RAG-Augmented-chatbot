@@ -9,7 +9,7 @@ def parse_markdown_files(folder_path, output_json, chunk_size=1200):
             if file.endswith(".md"):
                 file_path = os.path.join(root, file)
                 if not os.path.exists(file_path):
-                    print(f"文件不存在，跳过: {file_path}")
+                    print(f"no such file, skip: {file_path}")
                     continue
 
                 with open(file_path, 'r', encoding='utf-8') as f:
