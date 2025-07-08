@@ -1,4 +1,3 @@
-sentence-transformers==3.4.1
 numpy
 flask
 gunicorn
@@ -10,3 +9,5 @@ requests
 tqdm
 langchain
 langchain-text-splitters
+langchain-community
+transformers
