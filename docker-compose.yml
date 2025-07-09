@@ -8,6 +8,5 @@ services:
     env_file:
       - .env
     volumes:
-      - ./embeddings:/app/embeddings
-      - ./config.json:/app/config.json  
+      - ./embeddings:/app/docs_clean/embeddings
     restart: unless-stopped
