@@ -1,15 +1,12 @@
 from flask import Flask, request, jsonify, send_from_directory
-from query import generate_answer_with_gpt, find_similar_documents, load_embeddings, load_faiss_index
+from scripts.query_pgvector import find_similar_documents_pgvector
+from scripts.generate_answer import generate_answer_with_gpt
 from sentence_transformers import SentenceTransformer
 import os
 
 app = Flask(__name__)
 
-# Load models and indexes once at startup
-sklearn_embeddings, sklearn_texts = load_embeddings("embeddings/sklearn_embeddings.npy", "embeddings/sklearn_texts.json")
-hf_embeddings, hf_texts = load_embeddings("embeddings/hf_embeddings.npy", "embeddings/hf_texts.json")
-sklearn_index = load_faiss_index("embeddings/sklearn_index.faiss")
-hf_index = load_faiss_index("embeddings/hf_index.faiss")
+# Load embedding model once
 model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
 
 @app.route("/query", methods=["POST"])
@@ -17,24 +14,29 @@ def query():
     data = request.json
     user_query = data.get("question", "")
 
-    # Find similar docs with source labels
-    results_sklearn = find_similar_documents(user_query, model, sklearn_index, sklearn_embeddings, sklearn_texts, source_label="sklearn", top_k=3)
-    results_hf = find_similar_documents(user_query, model, hf_index, hf_embeddings, hf_texts, source_label="transformers", top_k=3)
+    # Encode user query to embedding
+    query_embedding = model.encode(user_query)
 
-    combined_context = "\n\n".join([r[0] for r in results_sklearn + results_hf])
+    # Query pgvector to get top-k similar chunks
+    results_pg = find_similar_documents_pgvector(query_embedding, top_k=6)
 
-    # Generate GPT answer
+    # Combine content for GPT context
+    combined_context = "\n\n".join([r["content"] for r in results_pg])
+
+    # Generate final answer using OpenAI
     answer = generate_answer_with_gpt(user_query, combined_context)
 
-    # Return both answer and sources
+    # Build sources list for UI
     sources = [
-    {
-        "snippet": r[0][:120].replace('\n', ' '),  # replace linebreaks
-        "source": r[2],                           # source code - sklearn / transformers)
-        "relevance_score": round(float(r[1]), 4)         # 4 decimal points and float - flask - jsonify() only support float
-    } 
-    for r in (results_sklearn + results_hf)
-]
+        {
+            "snippet": r["content"][:120].replace('\n', ' '),
+            "source": r["source_file"],
+            "chunk_id": r["chunk_id"],
+            "relevance_score": round(float(r["distance"]), 4)
+        }
+        for r in results_pg
+    ]
+
     return jsonify({
         "answer": answer,
         "sources": sources

@@ -12,3 +12,6 @@ langchain-text-splitters
 langchain-community
 transformers
 google-cloud-storage
+psycopg2-binary
+pgvector
+langchain-huggingface
