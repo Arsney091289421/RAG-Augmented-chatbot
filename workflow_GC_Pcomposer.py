@@ -2,32 +2,31 @@ from airflow import models
 from airflow.utils.dates import days_ago
 from airflow.providers.google.cloud.operators.notebooks import NotebooksExecuteOperator
 
-sklearn_nb_path = "gs://langchain_bucket_arseny/notebook/sklearn_notebook.ipynb"
-transformers_nb_path = "gs://langchain_bucket_arseny/notebook/transformers_notebook.ipynb"
 
-# DAG 
+BUCKET = "langchain_bucket_arseny"
+SK_NB  = f"gs://{BUCKET}/notebook/sklearn_notebook.ipynb"
+TF_NB  = f"gs://{BUCKET}/notebook/transformers_notebook.ipynb"
+
 with models.DAG(
-    "rag_embeddings_analysis_dag",
-    schedule_interval=None,  
+    dag_id="rag_embeddings_analysis_dag",
     start_date=days_ago(1),
+    schedule_interval=None,
     catchup=False,
     tags=["rag", "notebooks"],
 ) as dag:
 
-    # sklearn notebook 
     run_sklearn = NotebooksExecuteOperator(
         task_id="run_sklearn_notebook",
-        location="us-east1",
         project_id="grand-voltage-465301-e8",
-        gcs_notebook_path=sklearn_nb_path,
+        location="us-central1",                 
+        gcs_notebook_path=SK_NB,
     )
 
-    # transformers notebook 
     run_transformers = NotebooksExecuteOperator(
         task_id="run_transformers_notebook",
-        location="us-east1",
         project_id="grand-voltage-465301-e8",
-        gcs_notebook_path=transformers_nb_path,
+        location="us-central1",
+        gcs_notebook_path=TF_NB,
     )
 
     [run_sklearn, run_transformers]
